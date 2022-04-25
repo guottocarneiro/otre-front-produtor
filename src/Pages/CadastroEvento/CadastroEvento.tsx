@@ -23,7 +23,7 @@ const CadastroEvento = () => {
         if (ev.target.name === 'tipo') {
             ingressoParaAlterar.tipo = ev.target.value;
         } else {
-            ingressoParaAlterar.valor = ev.target.value;
+            ingressoParaAlterar.valor = parseFloat(ev.target.value);
         }
         setIngressos(novosIngressos);
     }
@@ -117,7 +117,8 @@ const CadastroEvento = () => {
                         disabled={nome === '' ||
                             nome === null ||
                             data === '' ||
-                            data === null}
+                            data === null ||
+                            ingressos.some(x => x.tipo === '' || x.tipo === null || x.valor === 0 || x.valor === null)}
                     >
                         Cadastrar
                     </button>
