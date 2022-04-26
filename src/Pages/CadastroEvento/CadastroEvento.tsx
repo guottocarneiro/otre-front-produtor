@@ -10,6 +10,24 @@ interface Artista {
     nome: string
 }
 
+interface Endereco {
+    nome: string;
+    logradouro: string;
+    numero: string;
+    complemento: string;
+    bairro: string;
+    cidade: string;
+    uf: string;
+}
+
+interface Evento {
+    nome: string;
+    data: string;
+    endereco: Endereco;
+    artistas: Artista[];
+    ingressos: Ingresso[];
+}
+
 const CadastroEvento = () => {
 
     const [nome, setNome] = useState<string>('');
@@ -74,12 +92,34 @@ const CadastroEvento = () => {
             ingressos.some(x => x.tipo === '' || x.tipo === null || x.valor === 0 || x.valor === null);
     }
 
+    const cadastrarEvento = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const evento: Evento = {
+            artistas: artistas,
+            data: data,
+            endereco: {
+                bairro: enderecoBairro,
+                cidade: enderecoCidade,
+                complemento: enderecoComplemento,
+                logradouro: enderecoLogradouro,
+                nome: enderecoNome,
+                numero: enderecoNumero,
+                uf: enderecoUf
+            },
+            ingressos: ingressos,
+            nome: nome
+        };
+
+        console.log(evento);
+    }
+
     return (
         <>
             <h3>Cadastro de evento</h3>
             <p className="text-muted">Os campos com (*) são obrigatórios</p>
 
-            <Form>
+            <Form onSubmit={cadastrarEvento}>
 
                 <fieldset className="mb-3">
                     <legend>Informações gerais</legend>
