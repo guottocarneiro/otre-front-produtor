@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Form } from "react-bootstrap";
+import HeaderPagina from "../../Components/HeaderPagina/HeaderPagina";
 
 interface Ingresso {
     tipo: string
@@ -14,13 +15,13 @@ interface Endereco {
     nome: string;
     logradouro: string;
     numero: string;
-    complemento: string;
+    complemento?: string;
     bairro: string;
     cidade: string;
     uf: string;
 }
 
-interface Evento {
+export interface Evento {
     nome: string;
     descricao: string;
     data: string;
@@ -120,9 +121,11 @@ const CadastroEvento = () => {
     }
 
     return (
-        <>
-            <h3>Cadastro de evento</h3>
-            <p className="text-muted">Os campos com (*) são obrigatórios</p>
+        <div className="cadastro-evento">
+            <HeaderPagina
+                titulo="Cadastro de evento"
+                descricao="Os campos com (*) são obrigatórios"
+            />
 
             <Form onSubmit={cadastrarEvento}>
 
@@ -340,7 +343,7 @@ const CadastroEvento = () => {
                     </button>
                 </div>
             </Form>
-        </>
+        </div>
     );
 }
 
