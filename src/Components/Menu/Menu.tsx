@@ -1,7 +1,10 @@
 import {
-    Container, 
-    Nav, 
-    Navbar } from "react-bootstrap";
+    Container,
+    Nav,
+    Navbar,
+    NavDropdown
+} from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Menu = () => {
 
@@ -9,11 +12,13 @@ const Menu = () => {
         <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
                 <Navbar.Brand href="#home">Rotto</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Toggle aria-controls="navbarNavBasic" />
+                <Navbar.Collapse id="navbarNavBasic">
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Link</Nav.Link>
+                        <NavDropdown title="Eventos" id="navDropdownEventos">
+                            <Link to="/cadastro-evento" data-rr-ui-dropdown-item="" className="dropdown-item">Cadastrar</Link>
+                            <Link to="/lista-eventos" data-rr-ui-dropdown-item="" className="dropdown-item">Listar</Link>
+                        </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
