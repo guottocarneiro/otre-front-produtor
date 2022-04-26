@@ -1,5 +1,5 @@
 import { Card } from "react-bootstrap";
-import { Evento } from "../../Pages/CadastroEvento/CadastroEvento";
+import Evento from "../../interfaces/evento.interface";
 
 interface CardEvento {
     evento: Evento;

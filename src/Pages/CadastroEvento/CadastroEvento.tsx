@@ -1,34 +1,9 @@
 import { useState } from "react";
 import { Form } from "react-bootstrap";
 import HeaderPagina from "../../Components/HeaderPagina/HeaderPagina";
-
-interface Ingresso {
-    tipo: string
-    valor: number
-}
-
-interface Artista {
-    nome: string
-}
-
-interface Endereco {
-    nome: string;
-    logradouro: string;
-    numero: string;
-    complemento?: string;
-    bairro: string;
-    cidade: string;
-    uf: string;
-}
-
-export interface Evento {
-    nome: string;
-    descricao: string;
-    data: string;
-    endereco: Endereco;
-    artistas: Artista[];
-    ingressos: Ingresso[];
-}
+import Artista from "../../interfaces/artista.interface";
+import Ingresso from "../../interfaces/ingresso.interface";
+import Evento from "../../interfaces/evento.interface";
 
 const CadastroEvento = () => {
 
