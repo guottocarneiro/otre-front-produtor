@@ -22,6 +22,7 @@ interface Endereco {
 
 interface Evento {
     nome: string;
+    descricao: string;
     data: string;
     endereco: Endereco;
     artistas: Artista[];
@@ -31,6 +32,7 @@ interface Evento {
 const CadastroEvento = () => {
 
     const [nome, setNome] = useState<string>('');
+    const [descricao, setDescricao] = useState<string>('');
     const [data, setData] = useState<string>('');
     const [enderecoNome, setEnderecoNome] = useState<string>('');
     const [enderecoLogradouro, setEnderecoLogradouro] = useState<string>('');
@@ -76,6 +78,8 @@ const CadastroEvento = () => {
     const camposValidos = () => {
         return nome === '' ||
             nome === null ||
+            descricao === '' ||
+            descricao === null ||
             data === '' ||
             data === null ||
             enderecoNome === '' ||
@@ -108,7 +112,8 @@ const CadastroEvento = () => {
                 uf: enderecoUf
             },
             ingressos: ingressos,
-            nome: nome
+            nome: nome,
+            descricao: descricao
         };
 
         console.log(evento);
@@ -130,6 +135,16 @@ const CadastroEvento = () => {
                             type="text"
                             placeholder="Nome do evento"
                             onChange={ev => setNome(ev.target.value)}
+                        />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="txtDescricaoEvento">
+                        <Form.Label>Descrição *</Form.Label>
+                        <Form.Control
+                            as="textarea"
+                            type="text"
+                            placeholder="Descrição do evento"
+                            onChange={ev => setDescricao(ev.target.value)}
                         />
                     </Form.Group>
 
