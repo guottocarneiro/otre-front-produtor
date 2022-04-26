@@ -1,8 +1,8 @@
 import { Container } from 'react-bootstrap';
 import './App.css';
-import Menu from './Components/Menu/Menu';
-import CadastroEvento from './Pages/CadastroEvento/CadastroEvento';
-import ListaEventos from './Pages/ListaEventos/ListaEventos';
+import Menu from './components/Menu/Menu';
+import CadastroEvento from './pages/CadastroEvento/CadastroEvento';
+import ListaEventos from './pages/ListaEventos/ListaEventos';
 
 function App() {
   return (

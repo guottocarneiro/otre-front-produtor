@@ -1,5 +1,5 @@
-import CardEvento from "../../Components/CardEvento/CardEvento";
-import HeaderPagina from "../../Components/HeaderPagina/HeaderPagina";
+import CardEvento from "../../components/CardEvento/CardEvento";
+import HeaderPagina from "../../components/HeaderPagina/HeaderPagina";
 import Evento from "../../interfaces/evento.interface";
 
 const ListaEventos = () => {

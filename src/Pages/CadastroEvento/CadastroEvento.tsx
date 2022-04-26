@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form } from "react-bootstrap";
-import HeaderPagina from "../../Components/HeaderPagina/HeaderPagina";
+import HeaderPagina from "../../components/HeaderPagina/HeaderPagina";
 import Artista from "../../interfaces/artista.interface";
 import Ingresso from "../../interfaces/ingresso.interface";
 import Evento from "../../interfaces/evento.interface";
