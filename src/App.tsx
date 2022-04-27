@@ -13,6 +13,7 @@ import Login from './pages/Login/Login';
 import Registro from './pages/Registro/Registro';
 import { useEffect, useState } from 'react';
 import usuarioStore from './store/usuario.store';
+import UsuarioService from './services/usuario.service';
 
 function App() {
 
@@ -23,10 +24,21 @@ function App() {
     usuarioStore.init();
   }, [])
 
+  const sair = () => {
+    const service = new UsuarioService();
+    service.sair();
+  }
+
   return (
     <Router>
-      { usuario !== null && usuario !== undefined ? <Menu /> : null }
-      {JSON.stringify(usuario)}
+      { 
+        usuario !== null && usuario !== undefined ?
+        <Menu
+          email={usuario.email}
+          sair={sair}
+        /> :
+        null 
+      }
       <Container className="app-container">
         <Routes>
           <Route path='/' element={<CadastroEvento />} />

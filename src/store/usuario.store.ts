@@ -19,7 +19,7 @@ const usuarioStore = {
         usuario.next(estado);
     },
     removerUsuario: () => {
-        estado = estadoInicial;
+        estado = null;
         usuario.next(estado);
     },
     estadoInicial
