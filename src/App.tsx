@@ -10,6 +10,7 @@ import CadastroEvento from './pages/CadastroEvento/CadastroEvento';
 import ListaEventos from './pages/ListaEventos/ListaEventos';
 import DetalhesEvento from './pages/DetalhesEvento/DetalhesEvento';
 import Login from './pages/Login/Login';
+import Registro from './pages/Registro/Registro';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/lista-eventos' element={<ListaEventos />} />
           <Route path='/detalhes-evento' element={<DetalhesEvento />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/login-cadastro' element={<Registro />} />
         </Routes>
       </Container>
     </Router>
