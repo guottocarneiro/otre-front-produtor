@@ -1,13 +1,17 @@
 import usuarioStore from '../store/usuario.store';
 
+const usuarios = [
+    { email: 'renan@email.com' },
+    { email: 'otto@email.com' }
+]
 
 class UsuarioService {
 
     logar(id: string, email: string) {
-        if (email === 'renan@email.com') {
+        if (usuarios.some(x => x.email === email)) {
 
             localStorage.setItem('otre-usuario', JSON.stringify({ id, email }));
-            usuarioStore.adicionarUsuario();
+            usuarioStore.adicionarUsuario(id, email);
         }
     }
 

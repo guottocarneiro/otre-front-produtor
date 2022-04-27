@@ -1,8 +1,8 @@
 import { Subject } from "rxjs";
 
-const usuario = new Subject<boolean>();
+const usuario = new Subject();
 
-const estadoInicial = localStorage.getItem('otre-usuario') !== null;
+const estadoInicial = JSON.parse(localStorage.getItem('otre-usuario') as string);
 
 let estado = estadoInicial;
 
@@ -11,8 +11,11 @@ const usuarioStore = {
         usuario.next(estado);
     },
     subscribe: (setState: any) => usuario.subscribe(setState),
-    adicionarUsuario: () => {
-        estado = true;
+    adicionarUsuario: (id: string, email: string) => {
+        estado = {
+            id,
+            email
+        };
         usuario.next(estado);
     },
     removerUsuario: () => {

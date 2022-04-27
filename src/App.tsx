@@ -16,16 +16,17 @@ import usuarioStore from './store/usuario.store';
 
 function App() {
 
-  const [logado, setLogado] = useState<boolean>(usuarioStore.estadoInicial);
+  const [usuario, setUsuario] = useState(usuarioStore.estadoInicial);
 
   useEffect(() => {
-    usuarioStore.subscribe(setLogado);
+    usuarioStore.subscribe(setUsuario);
     usuarioStore.init();
   }, [])
 
   return (
     <Router>
-      { logado ? <Menu /> : null }
+      { usuario !== null && usuario !== undefined ? <Menu /> : null }
+      {JSON.stringify(usuario)}
       <Container className="app-container">
         <Routes>
           <Route path='/' element={<CadastroEvento />} />
