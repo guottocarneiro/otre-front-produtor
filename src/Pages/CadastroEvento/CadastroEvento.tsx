@@ -19,7 +19,7 @@ const CadastroEvento = () => {
     const [enderecoUf, setEnderecoUf] = useState<string>('');
 
     const [artistas, setArtistas] = useState<Array<Artista>>([{ nome: '' }]);
-    const [ingressos, setIngressos] = useState<Array<Ingresso>>([{ tipo: '', valor: 0 }]);
+    const [ingressos, setIngressos] = useState<Array<Ingresso>>([{ tipo: '', valor: 0, quantidade: 1 }]);
 
     const adicionarArtista = () => {
         setArtistas([...artistas, { nome: '' }]);
@@ -33,7 +33,7 @@ const CadastroEvento = () => {
     }
 
     const adicionarIngresso = () => {
-        setIngressos([...ingressos, { tipo: '', valor: 0 }]);
+        setIngressos([...ingressos, { tipo: '', valor: 0, quantidade: 0 }]);
     }
 
     const tratarAlteracaoIngresso = (i: number, ev: React.FormEvent<HTMLInputElement>) => {
@@ -47,6 +47,12 @@ const CadastroEvento = () => {
             valor = valor.replace(/[^0-9\.]+/g, '');
             ev.currentTarget.value = valor;
             ingressoParaAlterar.valor = parseFloat(valor) || 0;
+        } else if (ev.currentTarget.name === 'ingressoQuantidade') {
+            let valor = ev.currentTarget.value;
+            valor = valor.replace(/\D/g, "");
+            valor = valor.replace(/[^0-9\.]+/g, '');
+            ev.currentTarget.value = valor;
+            ingressoParaAlterar.quantidade = parseFloat(valor) || 0;
         }
         setIngressos(novosIngressos);
     }
@@ -69,7 +75,7 @@ const CadastroEvento = () => {
             enderecoUf === '' ||
             enderecoUf === null ||
             artistas.some(x => x.nome === '' || x.nome === null) ||
-            ingressos.some(x => x.tipo === '' || x.tipo === null || x.valor === 0 || x.valor === null);
+            ingressos.some(x => x.tipo === '' || x.tipo === null || x.valor === 0 || x.valor === null || x.quantidade === 0 || x.quantidade === null);
     }
 
     const cadastrarEvento = (e: React.FormEvent<HTMLFormElement>) => {
@@ -267,7 +273,7 @@ const CadastroEvento = () => {
                         ingressos.map((ing, index) => {
                             return (
                                 <div className="row" key={index}>
-                                    <div className="col-md-6">
+                                    <div className="col-md-4">
                                         <Form.Group className="mb-3" controlId={`txtIngressoTipo${index}`}>
                                             <Form.Label>Tipo ingresso {index + 1} *</Form.Label>
                                             <input
@@ -281,7 +287,7 @@ const CadastroEvento = () => {
                                         </Form.Group>
                                     </div>
 
-                                    <div className="col-md-6">
+                                    <div className="col-md-4">
                                         <Form.Group className="mb-3" controlId={`txtIngressoValor${index}`}>
                                             <Form.Label>Valor ingresso {index + 1} *</Form.Label>
                                             <input
@@ -291,6 +297,20 @@ const CadastroEvento = () => {
                                                 onChange={ev => tratarAlteracaoIngresso(index, ev)}
                                                 id={`txtIngressoValor${index}`}
                                                 name="ingressoValor"
+                                            />
+                                        </Form.Group>
+                                    </div>
+
+                                    <div className="col-md-4">
+                                        <Form.Group className="mb-3" controlId={`txtIngressoQuantidade${index}`}>
+                                            <Form.Label>Quantidade ingresso {index + 1} *</Form.Label>
+                                            <input
+                                                className="form-control"
+                                                type="text"
+                                                placeholder={`Quantidade ingresso ${index + 1}`}
+                                                onChange={ev => tratarAlteracaoIngresso(index, ev)}
+                                                id={`txtIngressoQuantidade${index}`}
+                                                name="ingressoQuantidade"
                                             />
                                         </Form.Group>
                                     </div>
