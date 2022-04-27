@@ -8,7 +8,7 @@ const ListaEventos = () => {
       {
           artistas: [],
           data: '03/09/2022',
-          descricao: 'Desrição do evento bem detalhadas falando sobre como vai ser etc',
+          descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec felis laoreet, euismod velit at, maximus odio.',
           endereco: {
               bairro: 'Pampulha',
               cidade: 'Belo Horizonte',
@@ -19,8 +19,24 @@ const ListaEventos = () => {
               uf: 'MG'
           },
           ingressos: [],
-          nome: 'Sarará'
-      }  
+          nome: 'Evento do Renan'
+      },
+      {
+        artistas: [],
+        data: '03/09/2022',
+        descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec felis laoreet, euismod velit at, maximus odio.',
+        endereco: {
+            bairro: 'Pampulha',
+            cidade: 'Belo Horizonte',
+            complemento: undefined,
+            logradouro: 'Avenida Presidente Carlos Luz',
+            nome: 'Mineirão',
+            numero: '1921',
+            uf: 'MG'
+        },
+        ingressos: [],
+        nome: 'Evento do Renan'
+    }
     ];
 
     return (
