@@ -11,7 +11,7 @@ const Menu = () => {
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
-                <Navbar.Brand href="#home">Rotto</Navbar.Brand>
+                <Navbar.Brand href="#home">otre</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarNavBasic" />
                 <Navbar.Collapse id="navbarNavBasic">
                     <Nav className="me-auto">
