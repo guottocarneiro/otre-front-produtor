@@ -1,0 +1,11 @@
+.detalhes-evento-container {
+    margin-top: 25px;
+}
+
+.detalhes-evento-informacoes p {
+    margin-bottom: .4rem;
+}
+
+.detalhes-evento-informacoes i.bi {
+    margin-right: 10px;
+}
