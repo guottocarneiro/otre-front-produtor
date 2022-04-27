@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import LoginFormulario from "../../components/LoginFormulario/LoginFormulario";
+import UsuarioService from "../../services/usuario.service";
 import './Login.css';
 
 const Login = () => {
@@ -11,8 +13,11 @@ const Login = () => {
     const [erro, setErro] = useState<boolean>(false);
     const [textoErro, setTextoErro] = useState<string>('');
 
-    const entrar = () => {
+    const entrar = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
+        const usuarioService = new UsuarioService();
+        usuarioService.logar('123456', email);
     }
 
     return (
@@ -25,6 +30,9 @@ const Login = () => {
                 onChangeEmail={setEmail}
                 onChangeSenha={setSenha}
             />
+            <div>
+                <p>Não é cadastrado? <Link to="/registro">Clique aqui</Link></p>
+            </div>
         </main>
     );
 }
