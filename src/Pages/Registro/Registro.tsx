@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import LoginFormulario from "../../components/LoginFormulario/LoginFormulario";
+import usuarioService from "../../services/usuario.service";
 import './Registro.css';
 
 const Registro = () => {
@@ -9,6 +10,14 @@ const Registro = () => {
     const [senha, setSenha] = useState<string>('');
     const [confSenha, setConfSenha] = useState<string>('');
     const [registrando, setRegistrando] = useState<boolean>(false);
+
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        if (usuarioService.logado()) {
+            navigate('/lista-eventos');
+        }
+    })
 
     const registrar = (e: React.FormEvent<HTMLFormElement>) => {
         setRegistrando(true);

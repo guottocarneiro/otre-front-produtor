@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Evento from '../../interfaces/evento.interface';
+import usuarioService from '../../services/usuario.service';
 import obterDescricaoEndereco from '../../utils/descricao-endereco.utils';
 import './DetalhesEvento.css';
 
@@ -22,6 +24,14 @@ const DetalhesEvento = () => {
         nome: ''
     }
     const [evento, setEvento] = useState<Evento>(estadoInicial);
+
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        if (!usuarioService.logado()) {
+            navigate('/login');
+        }
+    })
 
     useEffect(() => {
         const novoEvento: Evento = {

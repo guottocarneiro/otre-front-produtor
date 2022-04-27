@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import HeaderPagina from "../../components/HeaderPagina/HeaderPagina";
 import Artista from "../../interfaces/artista.interface";
 import Ingresso from "../../interfaces/ingresso.interface";
 import Evento from "../../interfaces/evento.interface";
+import { useNavigate } from "react-router-dom";
+import usuarioService from "../../services/usuario.service";
 
 const CadastroEvento = () => {
 
@@ -20,6 +22,14 @@ const CadastroEvento = () => {
 
     const [artistas, setArtistas] = useState<Array<Artista>>([{ nome: '' }]);
     const [ingressos, setIngressos] = useState<Array<Ingresso>>([{ tipo: '', valor: 0, quantidade: 1 }]);
+
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        if (!usuarioService.logado()) {
+            navigate('/login');
+        }
+    })
 
     const adicionarArtista = () => {
         setArtistas([...artistas, { nome: '' }]);

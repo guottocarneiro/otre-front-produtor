@@ -13,7 +13,7 @@ import Login from './pages/Login/Login';
 import Registro from './pages/Registro/Registro';
 import { useEffect, useState } from 'react';
 import usuarioStore from './store/usuario.store';
-import UsuarioService from './services/usuario.service';
+import usuarioService from './services/usuario.service';
 
 function App() {
 
@@ -24,10 +24,7 @@ function App() {
     usuarioStore.init();
   }, [])
 
-  const sair = () => {
-    const service = new UsuarioService();
-    service.sair();
-  }
+  const sair = () => usuarioService.sair();
 
   return (
     <Router>

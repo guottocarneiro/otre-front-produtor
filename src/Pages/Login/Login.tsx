@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import LoginFormulario from "../../components/LoginFormulario/LoginFormulario";
-import UsuarioService from "../../services/usuario.service";
+import usuarioService from "../../services/usuario.service";
 import './Login.css';
 
 const Login = () => {
@@ -13,10 +13,17 @@ const Login = () => {
     const [erro, setErro] = useState<boolean>(false);
     const [textoErro, setTextoErro] = useState<string>('');
 
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        if (usuarioService.logado()) {
+            navigate('/lista-eventos');
+        }
+    })
+
     const entrar = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const usuarioService = new UsuarioService();
         usuarioService.logar('123456', email);
     }
 
