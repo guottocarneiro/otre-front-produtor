@@ -1,6 +1,7 @@
 import { Subject } from "rxjs";
+import { UsuarioLogado } from "../interfaces/usuario.interface";
 
-const usuario = new Subject();
+const usuario = new Subject<UsuarioLogado>();
 
 const estadoInicial = JSON.parse(localStorage.getItem('otre-usuario') as string);
 

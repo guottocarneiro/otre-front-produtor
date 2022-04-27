@@ -1,3 +1,4 @@
+import { Usuario, UsuarioLogado } from '../interfaces/usuario.interface';
 import usuarioStore from '../store/usuario.store';
 
 const usuarios = [
@@ -5,13 +6,24 @@ const usuarios = [
     { email: 'otto@email.com' }
 ]
 
-const usuarioService =  {
+const usuarioService = {
 
-    logar: (id: string, email: string) => {
-        if (usuarios.some(x => x.email === email)) {
+    logar: async (usuario: Usuario): Promise<UsuarioLogado | undefined> => {
+        try {
+            let email = usuario.email;
+            if (usuarios.some(x => x.email === email)) {
+                
+                const usuarioLogado: UsuarioLogado = {
+                    id: '123456',
+                    email
+                };
+                localStorage.setItem('otre-usuario', JSON.stringify(usuarioLogado));
+                usuarioStore.adicionarUsuario(usuarioLogado.id, usuarioLogado.email);
 
-            localStorage.setItem('otre-usuario', JSON.stringify({ id, email }));
-            usuarioStore.adicionarUsuario(id, email);
+                return usuarioLogado;
+            }
+        } catch (erro: any) {
+            throw new Error(erro);
         }
     },
     sair: () => {
