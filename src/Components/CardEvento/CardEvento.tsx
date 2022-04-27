@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import Evento from "../../interfaces/evento.interface";
 import './CardEvento.css';
 
-interface CardEvento {
+interface CardEventoInterface {
     evento: Evento;
 }
 
 const CardEvento = ({
     evento
-}: CardEvento) => {
+}: CardEventoInterface) => {
     return (
         <Card className="card-evento">
             <Card.Body>

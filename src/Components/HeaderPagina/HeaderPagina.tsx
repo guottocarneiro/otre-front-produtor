@@ -1,4 +1,4 @@
-interface HeaderPagina {
+interface HeaderPaginaInterface {
     titulo: string;
     descricao?: string;
 }
@@ -6,7 +6,7 @@ interface HeaderPagina {
 const HeaderPagina = ({
     titulo,
     descricao
-}: HeaderPagina) => {
+}: HeaderPaginaInterface) => {
     return (
         <div className="header-pagina">
             <h3 style={{ marginBottom: descricao === undefined ? '1rem' : '.5rem' }}>{titulo}</h3>
