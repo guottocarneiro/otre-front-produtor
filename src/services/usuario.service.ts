@@ -12,7 +12,7 @@ const usuarioService = {
         try {
             let email = usuario.email;
             if (usuarios.some(x => x.email === email)) {
-                
+
                 const usuarioLogado: UsuarioLogado = {
                     id: '123456',
                     email
@@ -30,7 +30,20 @@ const usuarioService = {
         localStorage.removeItem('otre-usuario');
         usuarioStore.removerUsuario();
     },
-    logado: () => JSON.parse(localStorage.getItem('otre-usuario') as string) != null
+    logado: () => JSON.parse(localStorage.getItem('otre-usuario') as string) != null,
+    registrar: async (usuario: Usuario): Promise<UsuarioLogado | undefined> => {
+        try {
+            let email = usuario.email;
+            const usuarioLogado: UsuarioLogado = {
+                id: '123456',
+                email
+            };
+
+            return usuarioLogado;
+        } catch (erro: any) {
+            throw new Error(erro);
+        }
+    }
 }
 
 export default usuarioService;

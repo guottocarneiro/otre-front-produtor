@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LoginFormulario from "../../components/LoginFormulario/LoginFormulario";
+import { Usuario } from "../../interfaces/usuario.interface";
 import usuarioService from "../../services/usuario.service";
 import './Registro.css';
 
@@ -11,6 +12,9 @@ const Registro = () => {
     const [confSenha, setConfSenha] = useState<string>('');
     const [registrando, setRegistrando] = useState<boolean>(false);
 
+    const [erro, setErro] = useState<boolean>(false);
+    const [textoErro, setTextoErro] = useState<string>('');
+
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -20,7 +24,32 @@ const Registro = () => {
     })
 
     const registrar = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
         setRegistrando(true);
+
+        const usuario: Usuario = {
+            email,
+            senha
+        };
+        usuarioService.registrar(usuario)
+        .then(() => {
+            setEmail('');
+            setSenha('');
+            setConfSenha('');
+        })
+        .catch((erro: any) => {
+            setErro(true);
+            setTextoErro('Ocorreu um erro ao fazer o registro. Tente novamente mais tarde!');
+            console.error(`[ERRO]: ${erro}`);
+        })
+        .finally(() => setRegistrando(false))
+    }
+
+    const exibirErro = () => {
+        return erro === true &&
+            textoErro !== '' &&
+            textoErro !== null;
     }
 
     const senhasIncorretas = () => {
@@ -65,6 +94,13 @@ const Registro = () => {
             <div>
                 <p>Já é cadastrado? <Link to="/login">Faça seu login</Link></p>
             </div>
+            {
+                exibirErro() ?
+                    <div className="alert alert-danger">
+                        {textoErro}
+                    </div> :
+                    null
+            }
         </main>
     )
 }
