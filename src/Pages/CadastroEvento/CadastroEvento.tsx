@@ -6,6 +6,8 @@ import Ingresso from "../../interfaces/ingresso.interface";
 import Evento from "../../interfaces/evento.interface";
 import { useNavigate } from "react-router-dom";
 import usuarioService from "../../services/usuario.service";
+import usuarioStore from "../../store/usuario.store";
+import { UsuarioLogado } from "../../interfaces/usuario.interface";
 
 const CadastroEvento = () => {
 
@@ -22,6 +24,8 @@ const CadastroEvento = () => {
 
     const [artistas, setArtistas] = useState<Array<Artista>>([{ nome: '' }]);
     const [ingressos, setIngressos] = useState<Array<Ingresso>>([{ tipo: '', valor: 0, quantidade: 1 }]);
+
+    const usuario: UsuarioLogado = usuarioStore.estadoInicial as UsuarioLogado;
 
     let navigate = useNavigate();
 
@@ -113,7 +117,7 @@ const CadastroEvento = () => {
 
     const cadastrarEvento = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        
         const evento: Evento = {
             artistas: artistas,
             data: data,
@@ -128,7 +132,10 @@ const CadastroEvento = () => {
             },
             ingressos: ingressos,
             nome: nome,
-            descricao: descricao
+            descricao: descricao,
+            ativado: true,
+            id: '',
+            idProdutor: usuario.id
         };
 
         console.log(evento);

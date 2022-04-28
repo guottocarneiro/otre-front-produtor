@@ -18,34 +18,7 @@ const DetalhesEvento = () => {
     })
 
     useEffect(() => {
-        const novoEvento: Evento = {
-            artistas: [
-                { nome: 'Duda Beat' },
-                { nome: 'BaianaSystem' },
-                { nome: 'Djonga' },
-                { nome: 'Iza' },
-                { nome: 'Silva' },
-                { nome: 'Glória Groove' }
-            ],
-            data: '03/09/2022',
-            descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec felis laoreet, euismod velit at, maximus odio.',
-            endereco: {
-                bairro: 'Pampulha',
-                cidade: 'Belo Horizonte',
-                complemento: undefined,
-                logradouro: 'Avenida Presidente Carlos Luz',
-                nome: 'Mineirão',
-                numero: '1921',
-                uf: 'MG'
-            },
-            ingressos: [
-                { quantidade: 4000, tipo: 'Inteira', valor: 200 },
-                { quantidade: 1000, tipo: 'Meia', valor: 100 },
-                { quantidade: 1000, tipo: 'Meia solidária', valor: 200 },
-                { quantidade: 500, tipo: 'Camarote', valor: 350 }
-            ],
-            nome: 'Evento do Renan'
-        };
+        const novoEvento: Evento = {} as Evento;
 
         setEvento(novoEvento);
     }, [])

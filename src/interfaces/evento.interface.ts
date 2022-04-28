@@ -9,4 +9,7 @@ export default interface Evento {
     endereco: Endereco;
     artistas: Artista[];
     ingressos: Ingresso[];
+    idProdutor: string;
+    id: string;
+    ativado: boolean;
 }

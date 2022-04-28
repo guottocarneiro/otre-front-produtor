@@ -22,7 +22,10 @@ const ListaEventos = () => {
                 uf: 'MG'
             },
             ingressos: [],
-            nome: 'Evento do Renan'
+            nome: 'Evento do Renan',
+            ativado: true,
+            id: '987654',
+            idProdutor: '123456'
         },
         {
             artistas: [],
@@ -38,7 +41,10 @@ const ListaEventos = () => {
                 uf: 'MG'
             },
             ingressos: [],
-            nome: 'Evento do Renan'
+            nome: 'Evento do Renan',
+            ativado: true,
+            id: '987654',
+            idProdutor: '123456'
         }
     ];
 
