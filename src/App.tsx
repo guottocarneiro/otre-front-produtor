@@ -38,7 +38,8 @@ function App() {
       }
       <Container className="app-container">
         <Routes>
-          <Route path='/' element={<CadastroEvento />} />
+          <Route path='/' element={<Login />} />
+          <Route path='*' element={<Login />} />
           <Route path='/cadastro-evento' element={<CadastroEvento />} />
           <Route path='/lista-eventos' element={<ListaEventos />} />
           <Route path='/detalhes-evento' element={<DetalhesEvento />} />
