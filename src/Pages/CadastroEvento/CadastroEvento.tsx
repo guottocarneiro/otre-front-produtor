@@ -31,6 +31,16 @@ const CadastroEvento = () => {
         }
     })
 
+    const tratarAlteracaoData = (ev: React.FormEvent<HTMLInputElement>) => {
+        ev.currentTarget.maxLength = 10;
+        let valor = ev.currentTarget.value;
+        valor = valor.replace(/\D/g, "");
+        valor = valor.replace(/(\d{2})(\d)/, '$1/$2');
+        valor = valor.replace(/(\d{2})(\d{4})$/, "$1/$2");
+        ev.currentTarget.value = valor;
+        setData(valor);
+    }
+
     const adicionarArtista = () => {
         setArtistas([...artistas, { nome: '' }]);
     }
@@ -68,7 +78,7 @@ const CadastroEvento = () => {
         valor = valor.replace(/\D/g, "");
         valor = valor.replace(/(\d)(\d{2})$/, "$1,$2");
         valor = valor.replace(/(?=(\d{3})+(\D))\B/g, ".");
-        
+
         return valor;
     }
 
@@ -159,10 +169,11 @@ const CadastroEvento = () => {
                         <div className="col-md-6">
                             <Form.Group className="mb-3" controlId="txtDataEvento">
                                 <Form.Label>Data *</Form.Label>
-                                <Form.Control
+                                <input
+                                    className="form-control"
                                     type="text"
-                                    placeholder="Data do evento"
-                                    onChange={ev => setData(ev.target.value)}
+                                    placeholder="dd/mm/aaaa"
+                                    onChange={ev => tratarAlteracaoData(ev)}
                                 />
                             </Form.Group>
                         </div>
