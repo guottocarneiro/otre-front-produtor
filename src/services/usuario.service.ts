@@ -1,9 +1,9 @@
 import { Usuario, UsuarioLogado } from '../interfaces/usuario.interface';
 import usuarioStore from '../store/usuario.store';
 
-const usuarios = [
-    { email: 'renan@email.com' },
-    { email: 'otto@email.com' }
+const usuarios: UsuarioLogado[] = [
+    { email: 'renan@email.com', id: '123456' },
+    { email: 'otto@email.com', id: '456789' }
 ]
 
 const usuarioService = {
@@ -13,10 +13,7 @@ const usuarioService = {
             let email = usuario.email;
             if (usuarios.some(x => x.email === email)) {
 
-                const usuarioLogado: UsuarioLogado = {
-                    id: '123456',
-                    email
-                };
+                const usuarioLogado: UsuarioLogado = usuarios.filter(x => x.email === email)[0];
                 localStorage.setItem('otre-usuario', JSON.stringify(usuarioLogado));
                 usuarioStore.adicionarUsuario(usuarioLogado.id, usuarioLogado.email);
 

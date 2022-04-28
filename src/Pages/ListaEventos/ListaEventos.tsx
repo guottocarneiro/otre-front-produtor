@@ -1,60 +1,39 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CardEvento from "../../components/CardEvento/CardEvento";
 import HeaderPagina from "../../components/HeaderPagina/HeaderPagina";
 import Evento from "../../interfaces/evento.interface";
+import { UsuarioLogado } from "../../interfaces/usuario.interface";
+import eventoService from "../../services/evento.service";
 import usuarioService from "../../services/usuario.service";
+import usuarioStore from "../../store/usuario.store";
 
 const ListaEventos = () => {
 
-    const eventosFake: Evento[] = [
-        {
-            artistas: [],
-            data: '03/09/2022',
-            descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec felis laoreet, euismod velit at, maximus odio.',
-            endereco: {
-                bairro: 'Pampulha',
-                cidade: 'Belo Horizonte',
-                complemento: undefined,
-                logradouro: 'Avenida Presidente Carlos Luz',
-                nome: 'Mineirão',
-                numero: '1921',
-                uf: 'MG'
-            },
-            ingressos: [],
-            nome: 'Evento do Renan',
-            ativado: true,
-            id: '987654',
-            idProdutor: '123456'
-        },
-        {
-            artistas: [],
-            data: '03/09/2022',
-            descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec felis laoreet, euismod velit at, maximus odio.',
-            endereco: {
-                bairro: 'Pampulha',
-                cidade: 'Belo Horizonte',
-                complemento: undefined,
-                logradouro: 'Avenida Presidente Carlos Luz',
-                nome: 'Mineirão',
-                numero: '1921',
-                uf: 'MG'
-            },
-            ingressos: [],
-            nome: 'Evento do Renan',
-            ativado: true,
-            id: '987654',
-            idProdutor: '123456'
-        }
-    ];
+    const [eventos, setEventos] = useState<Evento[]>([]);
+    const [usuario, setUsuario] = useState<UsuarioLogado>(usuarioStore.estadoInicial);
 
     let navigate = useNavigate();
 
     useEffect(() => {
         if (!usuarioService.logado()) {
             navigate('/login');
+            return;
         }
+
+        usuarioStore.subscribe(setUsuario);
+        usuarioStore.init();
     })
+
+    useLayoutEffect(() => {
+
+        if (usuario !== null) {
+            eventoService.listarEventos(usuario.id)
+            .then(eventos => {
+                setEventos(eventos)
+            })
+        }
+    }, [usuario])
 
     return (
         <div className="lista-eventos">
@@ -63,14 +42,16 @@ const ListaEventos = () => {
             />
 
             {
-                eventosFake.map((evento, i) => {
-                    return (
-                        <CardEvento
-                            evento={evento}
-                            key={i}
-                        />
-                    );
-                })
+                eventos.length > 0 ?
+                    eventos.map((evento, i) => {
+                        return (
+                            <CardEvento
+                                evento={evento}
+                                key={i}
+                            />
+                        );
+                    }) :
+                    <h6>Nenhum evento cadastrado até o momento.</h6>
             }
         </div>
     );
