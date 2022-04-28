@@ -1,80 +1,93 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Evento from '../../interfaces/evento.interface';
+import eventoService from '../../services/evento.service';
 import usuarioService from '../../services/usuario.service';
 import obterDescricaoEndereco from '../../utils/descricao-endereco.utils';
 import './DetalhesEvento.css';
 
 const DetalhesEvento = () => {
 
-    const [evento, setEvento] = useState<Evento>({} as Evento);
+    const [evento, setEvento] = useState<Evento | null>(null);
 
     let navigate = useNavigate();
 
     useEffect(() => {
         if (!usuarioService.logado()) {
             navigate('/login');
+            return;
         }
-    })
+    }, [])
+
+    let { id } = useParams();
 
     useEffect(() => {
-        const novoEvento: Evento = {} as Evento;
+        const obterEvento = async () => eventoService.listarEvento(id as string)
+        .then(evento => {
+            setEvento(evento)
+        });
 
-        setEvento(novoEvento);
-    }, [])
+        obterEvento();
+    }, [id])
 
     return (
         <div className="detalhes-evento">
-            <div>
-                <h1 className="display-3">{evento.nome}</h1>
-                <p className="lead">{evento.descricao}</p>
-            </div>
+            {
+                evento !== null && evento !== undefined ?
+                    <>
+                        <div>
+                            <h1 className="display-3">{evento.nome}</h1>
+                            <p className="lead">{evento.descricao}</p>
+                        </div>
 
-            <div className="detalhes-evento-informacoes">
-                <p><i className="bi bi-geo-alt"></i> { obterDescricaoEndereco(evento.endereco) }</p>
-                <p><i className="bi bi-calendar"></i> {evento.data}</p>
-            </div>
+                        <div className="detalhes-evento-informacoes">
+                            <p><i className="bi bi-geo-alt"></i> {obterDescricaoEndereco(evento?.endereco)}</p>
+                            <p><i className="bi bi-calendar"></i> {evento.data}</p>
+                        </div>
 
-            <div className="detalhes-evento-artistas detalhes-evento-container">
-                <h5>Artistas</h5>
+                        <div className="detalhes-evento-artistas detalhes-evento-container">
+                            <h5>Artistas</h5>
 
-                <div className="row">
-                    <div className="col-md-6">
-                        <ul className="list-group list-group-flush">
-                            {
-                                evento.artistas.map((art, i) => {
-                                    return (
-                                        <li key={i} className="list-group-item">{art.nome}</li>
-                                    );
-                                })
-                            }
-                        </ul>
-                    </div>
-                </div>
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <ul className="list-group list-group-flush">
+                                        {
+                                            evento.artistas.map((art, i) => {
+                                                return (
+                                                    <li key={i} className="list-group-item">{art.nome}</li>
+                                                );
+                                            })
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
 
-            </div>
+                        </div>
 
-            <div className="detalhes-evento-ingressos detalhes-evento-container">
-                <h5>Ingressos</h5>
+                        <div className="detalhes-evento-ingressos detalhes-evento-container">
+                            <h5>Ingressos</h5>
 
-                <div className="row">
-                    <div className="col-md-6">
-                        <ul className="list-group">
-                            {
-                                evento.ingressos.map((ing, i) => {
-                                    return (
-                                        <li key={i} className="list-group-item">
-                                            <strong>{ing.tipo}</strong><br />
-                                            {ing.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}<br />
-                                            Quantidade: {ing.quantidade.toLocaleString('pt-br')}
-                                        </li>
-                                    );
-                                })
-                            }
-                        </ul>
-                    </div>
-                </div>
-            </div>
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <ul className="list-group">
+                                        {
+                                            evento.ingressos.map((ing, i) => {
+                                                return (
+                                                    <li key={i} className="list-group-item">
+                                                        <strong>{ing.tipo}</strong><br />
+                                                        {ing.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}<br />
+                                                        Quantidade: {ing.quantidade.toLocaleString('pt-br')}
+                                                    </li>
+                                                );
+                                            })
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </> :
+                    null
+            }
         </div>
     );
 }

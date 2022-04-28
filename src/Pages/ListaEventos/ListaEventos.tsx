@@ -18,14 +18,13 @@ const ListaEventos = () => {
     useEffect(() => {
         if (!usuarioService.logado()) {
             navigate('/login');
-            return;
         }
 
         usuarioStore.subscribe(setUsuario);
         usuarioStore.init();
     })
 
-    useLayoutEffect(() => {
+    useEffect(() => {
 
         if (usuario !== null) {
             eventoService.listarEventos(usuario.id)

@@ -31,6 +31,37 @@ const eventosMock: Evento[] = [
         idProdutor: '123456',
         id: '987654',
         ativado: true
+    },
+    {
+        artistas: [
+            { nome: 'Duda Beat' },
+            { nome: 'BaianaSystem' },
+            { nome: 'Djonga' },
+            { nome: 'Iza' },
+            { nome: 'Silva' },
+            { nome: 'Glória Groove' }
+        ],
+        data: '03/09/2022',
+        descricao: 'Lorem',
+        endereco: {
+            bairro: 'Pampulha',
+            cidade: 'Belo Horizonte',
+            complemento: undefined,
+            logradouro: 'Avenida Presidente Carlos Luz',
+            nome: 'Mineirão',
+            numero: '1921',
+            uf: 'MG'
+        },
+        ingressos: [
+            { quantidade: 4000, tipo: 'Inteira', valor: 200 },
+            { quantidade: 1000, tipo: 'Meia', valor: 100 },
+            { quantidade: 1000, tipo: 'Meia solidária', valor: 200 },
+            { quantidade: 500, tipo: 'Camarote', valor: 350 }
+        ],
+        nome: 'Evento do Renan',
+        idProdutor: '123456',
+        id: '753951',
+        ativado: true
     }
 ];
 

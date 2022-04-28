@@ -42,7 +42,7 @@ function App() {
           <Route path='*' element={<Login />} />
           <Route path='/cadastro-evento' element={<CadastroEvento />} />
           <Route path='/lista-eventos' element={<ListaEventos />} />
-          <Route path='/detalhes-evento' element={<DetalhesEvento />} />
+          <Route path='/detalhes-evento/:id' element={<DetalhesEvento />} />
           <Route path='/login' element={<Login />} />
           <Route path='/registro' element={<Registro />} />
         </Routes>
