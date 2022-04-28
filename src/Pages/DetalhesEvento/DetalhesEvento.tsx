@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Evento from '../../interfaces/evento.interface';
+import { UsuarioLogado } from '../../interfaces/usuario.interface';
 import eventoService from '../../services/evento.service';
 import usuarioService from '../../services/usuario.service';
+import usuarioStore from '../../store/usuario.store';
 import obterDescricaoEndereco from '../../utils/descricao-endereco.utils';
 import './DetalhesEvento.css';
 
 const DetalhesEvento = () => {
 
     const [evento, setEvento] = useState<Evento | null>(null);
+    const [usuario, setUsuario] = useState<UsuarioLogado>(usuarioStore.estadoInicial);
 
     let navigate = useNavigate();
 
@@ -17,7 +20,10 @@ const DetalhesEvento = () => {
             navigate('/login');
             return;
         }
-    }, [])
+
+        usuarioStore.subscribe(setUsuario);
+        usuarioStore.init();
+    }, [navigate, usuario])
 
     let { id } = useParams();
 

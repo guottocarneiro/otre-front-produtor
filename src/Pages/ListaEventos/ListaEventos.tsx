@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CardEvento from "../../components/CardEvento/CardEvento";
 import HeaderPagina from "../../components/HeaderPagina/HeaderPagina";
@@ -22,7 +22,7 @@ const ListaEventos = () => {
 
         usuarioStore.subscribe(setUsuario);
         usuarioStore.init();
-    })
+    }, [navigate, usuario])
 
     useEffect(() => {
 

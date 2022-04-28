@@ -37,7 +37,7 @@ const CadastroEvento = () => {
 
         usuarioStore.subscribe(setUsuario);
         usuarioStore.init();
-    })
+    }, [navigate, usuario])
 
     const tratarAlteracaoData = (ev: React.FormEvent<HTMLInputElement>) => {
         ev.currentTarget.maxLength = 10;
