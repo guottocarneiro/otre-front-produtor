@@ -52,20 +52,32 @@ const CadastroEvento = () => {
         if (ev.currentTarget.name === 'ingressoTipo') {
             ingressoParaAlterar.tipo = ev.currentTarget.value;
         } else if (ev.currentTarget.name === 'ingressoValor') {
-            let valor = ev.currentTarget.value;
-            valor = valor.replace(/\D/g, "");
-            valor = valor.replace(/(\d)(\d{2})$/, "$1,$2");
-            valor = valor.replace(/(?=(\d{3})+(\D))\B/g, ".");
+            let valor = tratarIngressoValor(ev.currentTarget.value)
             ev.currentTarget.value = valor;
             ingressoParaAlterar.valor = parseFloat(valor) || 0;
         } else if (ev.currentTarget.name === 'ingressoQuantidade') {
-            let valor = ev.currentTarget.value;
-            valor = valor.replace(/\D/g, "");
-            valor = valor.replace(/[^0-9]+/g, '');
+            let valor = tratarIngressoQuantidade(ev.currentTarget.value);
             ev.currentTarget.value = valor;
             ingressoParaAlterar.quantidade = parseFloat(valor) || 0;
         }
         setIngressos(novosIngressos);
+    }
+
+    const tratarIngressoValor = (valorCampo: string) => {
+        let valor = valorCampo;
+        valor = valor.replace(/\D/g, "");
+        valor = valor.replace(/(\d)(\d{2})$/, "$1,$2");
+        valor = valor.replace(/(?=(\d{3})+(\D))\B/g, ".");
+        
+        return valor;
+    }
+
+    const tratarIngressoQuantidade = (valorCampo: string) => {
+        let valor = valorCampo;
+        valor = valor.replace(/\D/g, "");
+        valor = valor.replace(/[^0-9]+/g, '');
+
+        return valor;
     }
 
     const camposValidos = () => {
