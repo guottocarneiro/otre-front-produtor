@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LoginFormulario from "../../components/LoginFormulario/LoginFormulario";
 import { Usuario } from "../../interfaces/usuario.interface";
 import usuarioService from "../../services/usuario.service";
+import { MENSAGENS } from "../../utils/mensagens.utils";
 import './Registro.css';
 
 const Registro = () => {
@@ -38,9 +39,13 @@ const Registro = () => {
             setSenha('');
             setConfSenha('');
         })
-        .catch((erro: any) => {
+        .catch((erro: Error) => {
             setErro(true);
-            setTextoErro('Ocorreu um erro ao fazer o registro. Tente novamente mais tarde!');
+            if (MENSAGENS.some(x => x.valor === erro.message)) {
+                setTextoErro(erro.message);
+            } else {
+                setTextoErro('Ocorreu um erro ao fazer o registro. Tente novamente mais tarde!');
+            }
             console.error(`[ERRO]: ${erro}`);
         })
         .finally(() => setRegistrando(false))
