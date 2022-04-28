@@ -21,8 +21,9 @@ const Registro = () => {
     useEffect(() => {
         if (usuarioService.logado()) {
             navigate('/lista-eventos');
+            return;
         }
-    })
+    }, [navigate])
 
     const registrar = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

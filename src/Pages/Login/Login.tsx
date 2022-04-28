@@ -19,8 +19,9 @@ const Login = () => {
     useEffect(() => {
         if (usuarioService.logado()) {
             navigate('/lista-eventos');
+            return;
         }
-    })
+    }, [navigate])
 
     const entrar = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
