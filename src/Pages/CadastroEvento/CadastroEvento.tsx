@@ -54,7 +54,8 @@ const CadastroEvento = () => {
         } else if (ev.currentTarget.name === 'ingressoValor') {
             let valor = ev.currentTarget.value;
             valor = valor.replace(/\D/g, "");
-            valor = valor.replace(/[^0-9]+/g, '');
+            valor = valor.replace(/(\d)(\d{2})$/, "$1,$2");
+            valor = valor.replace(/(?=(\d{3})+(\D))\B/g, ".");
             ev.currentTarget.value = valor;
             ingressoParaAlterar.valor = parseFloat(valor) || 0;
         } else if (ev.currentTarget.name === 'ingressoQuantidade') {
