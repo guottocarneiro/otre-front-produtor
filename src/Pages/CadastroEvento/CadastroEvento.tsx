@@ -25,14 +25,18 @@ const CadastroEvento = () => {
     const [artistas, setArtistas] = useState<Array<Artista>>([{ nome: '' }]);
     const [ingressos, setIngressos] = useState<Array<Ingresso>>([{ tipo: '', valor: 0, quantidade: 1 }]);
 
-    const usuario: UsuarioLogado = usuarioStore.estadoInicial as UsuarioLogado;
+    const [usuario, setUsuario] = useState<UsuarioLogado>(usuarioStore.estadoInicial);
 
     let navigate = useNavigate();
 
     useEffect(() => {
         if (!usuarioService.logado()) {
             navigate('/login');
+            return;
         }
+
+        usuarioStore.subscribe(setUsuario);
+        usuarioStore.init();
     })
 
     const tratarAlteracaoData = (ev: React.FormEvent<HTMLInputElement>) => {
