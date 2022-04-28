@@ -14,3 +14,9 @@
 .card-evento-titulo:hover {
     color: rgb(104, 104, 104);
 }
+
+.card-evento-texto-status {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}

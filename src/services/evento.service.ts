@@ -11,7 +11,7 @@ const eventosMock: Evento[] = [
             { nome: 'Glória Groove' }
         ],
         data: '03/09/2022',
-        descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec felis laoreet, euismod velit at, maximus odio.',
+        descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec felis laoreet, euismod velit at, maximus odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec felis laoreet, euismod velit at, maximus odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec felis laoreet, euismod velit at, maximus odio.',
         endereco: {
             bairro: 'Pampulha',
             cidade: 'Belo Horizonte',
@@ -52,6 +52,9 @@ const eventoService = {
         }
     },
     alterarStatusEvento: async (idEvento: string, status: boolean) => {
+        
+    },
+    cadastrarEvento: async (evento: Evento) => {
         
     }
 };
