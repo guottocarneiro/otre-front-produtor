@@ -7,23 +7,7 @@ import './DetalhesEvento.css';
 
 const DetalhesEvento = () => {
 
-    const estadoInicial: Evento = {
-        artistas: [],
-        data: '',
-        descricao: '',
-        endereco: {
-            bairro: '',
-            cidade: '',
-            complemento: undefined,
-            logradouro: '',
-            nome: '',
-            numero: '',
-            uf: ''
-        },
-        ingressos: [],
-        nome: ''
-    }
-    const [evento, setEvento] = useState<Evento>(estadoInicial);
+    const [evento, setEvento] = useState<Evento>({} as Evento);
 
     let navigate = useNavigate();
 
