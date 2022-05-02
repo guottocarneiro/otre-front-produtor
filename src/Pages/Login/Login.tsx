@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import LoginFormulario from "../../components/LoginFormulario/LoginFormulario";
+import LoginFormulario from "../../Components/LoginFormulario/LoginFormulario";
 import { Usuario } from "../../interfaces/usuario.interface";
 import usuarioService from "../../services/usuario.service";
 import './Login.css';
