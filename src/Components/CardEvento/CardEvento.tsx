@@ -1,6 +1,7 @@
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Evento from "../../interfaces/evento.interface";
+import obterDescricaoEndereco from "../../utils/descricao-endereco.utils";
 import './CardEvento.css';
 
 interface CardEventoInterface {
@@ -18,7 +19,7 @@ const CardEvento = ({
                 <Card.Title><Link to={`/detalhes-evento/${evento.id}`} className="card-evento-titulo">{evento.nome}</Link></Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
                     {
-                        `${evento.endereco.nome} - ${evento.endereco.logradouro}, ${evento.endereco.numero}, ${evento.endereco.complemento === undefined ? evento.endereco.bairro : `${evento.endereco.complemento}, ${evento.endereco.bairro}`} - ${evento.endereco.cidade} - ${evento.endereco.uf}`
+                        obterDescricaoEndereco(evento.endereco)
                     }
                 </Card.Subtitle>
                 <Card.Text>
