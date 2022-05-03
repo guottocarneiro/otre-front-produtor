@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CardEvento from "../../components/CardEvento/CardEvento";
-import HeaderPagina from "../../components/HeaderPagina/HeaderPagina";
+import CardEvento from "../../Components/CardEvento/CardEvento";
+import HeaderPagina from "../../Components/HeaderPagina/HeaderPagina";
 import Evento from "../../interfaces/evento.interface";
 import { UsuarioLogado } from "../../interfaces/usuario.interface";
 import eventoService from "../../services/evento.service";

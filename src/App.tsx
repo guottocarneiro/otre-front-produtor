@@ -5,15 +5,15 @@ import {
 } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import './App.css';
-import Menu from './components/Menu/Menu';
-import CadastroEvento from './pages/CadastroEvento/CadastroEvento';
-import ListaEventos from './pages/ListaEventos/ListaEventos';
-import DetalhesEvento from './pages/DetalhesEvento/DetalhesEvento';
-import Login from './pages/Login/Login';
-import Registro from './pages/Registro/Registro';
 import { useEffect, useState } from 'react';
 import usuarioStore from './store/usuario.store';
 import usuarioService from './services/usuario.service';
+import Login from './Pages/Login/Login';
+import Menu from './Components/Menu/Menu';
+import CadastroEvento from './Pages/CadastroEvento/CadastroEvento';
+import DetalhesEvento from './Pages/DetalhesEvento/DetalhesEvento';
+import ListaEventos from './Pages/ListaEventos/ListaEventos';
+import Registro from './Pages/Registro/Registro';
 
 function App() {
 
