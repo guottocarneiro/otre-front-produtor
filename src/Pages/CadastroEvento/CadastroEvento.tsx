@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import usuarioService from "../../services/usuario.service";
 import usuarioStore from "../../store/usuario.store";
 import { UsuarioLogado } from "../../interfaces/usuario.interface";
+import eventoService from "../../services/evento.service";
 
 const CadastroEvento = () => {
 
@@ -23,7 +24,7 @@ const CadastroEvento = () => {
     const [enderecoUf, setEnderecoUf] = useState<string>('');
 
     const [artistas, setArtistas] = useState<Array<Artista>>([{ nome: '' }]);
-    const [ingressos, setIngressos] = useState<Array<Ingresso>>([{ tipo: '', valor: 0, quantidade: 1 }]);
+    const [ingressos, setIngressos] = useState<Array<Ingresso>>([{ nome: '', valor: 0, quantidade: 1 }]);
 
     const [usuario, setUsuario] = useState<UsuarioLogado>(usuarioStore.estadoInicial);
 
@@ -61,14 +62,14 @@ const CadastroEvento = () => {
     }
 
     const adicionarIngresso = () => {
-        setIngressos([...ingressos, { tipo: '', valor: 0, quantidade: 0 }]);
+        setIngressos([...ingressos, { nome: '', valor: 0, quantidade: 0 }]);
     }
 
     const tratarAlteracaoIngresso = (i: number, ev: React.FormEvent<HTMLInputElement>) => {
         let novosIngressos = [...ingressos];
         let ingressoParaAlterar = novosIngressos[i];
         if (ev.currentTarget.name === 'ingressoTipo') {
-            ingressoParaAlterar.tipo = ev.currentTarget.value;
+            ingressoParaAlterar.nome = ev.currentTarget.value;
         } else if (ev.currentTarget.name === 'ingressoValor') {
             let valor = tratarIngressoValor(ev.currentTarget.value)
             ev.currentTarget.value = valor;
@@ -116,7 +117,7 @@ const CadastroEvento = () => {
             enderecoUf === '' ||
             enderecoUf === null ||
             artistas.some(x => x.nome === '' || x.nome === null) ||
-            ingressos.some(x => x.tipo === '' || x.tipo === null || x.valor === 0 || x.valor === null || x.quantidade === 0 || x.quantidade === null);
+            ingressos.some(x => x.nome === '' || x.nome === null || x.valor === 0 || x.valor === null || x.quantidade === 0 || x.quantidade === null);
     }
 
     const cadastrarEvento = (e: React.FormEvent<HTMLFormElement>) => {
@@ -142,7 +143,7 @@ const CadastroEvento = () => {
             idProdutor: usuario.id
         };
 
-        console.log(evento);
+        eventoService.cadastrarEvento(evento);
     }
 
     return (

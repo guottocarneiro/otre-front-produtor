@@ -1,5 +1,7 @@
 import Evento from "../interfaces/evento.interface";
 
+const URL_EVENTO = 'https://otre-backend.herokuapp.com/eventos';
+
 const eventosMock: Evento[] = [
     {
         artistas: [
@@ -22,10 +24,10 @@ const eventosMock: Evento[] = [
             uf: 'MG'
         },
         ingressos: [
-            { quantidade: 4000, tipo: 'Inteira', valor: 200 },
-            { quantidade: 1000, tipo: 'Meia', valor: 100 },
-            { quantidade: 1000, tipo: 'Meia solidária', valor: 200 },
-            { quantidade: 500, tipo: 'Camarote', valor: 350 }
+            { quantidade: 4000, nome: 'Inteira', valor: 200 },
+            { quantidade: 1000, nome: 'Meia', valor: 100 },
+            { quantidade: 1000, nome: 'Meia solidária', valor: 200 },
+            { quantidade: 500, nome: 'Camarote', valor: 350 }
         ],
         nome: 'Evento do Renan',
         idProdutor: '123456',
@@ -53,10 +55,10 @@ const eventosMock: Evento[] = [
             uf: 'MG'
         },
         ingressos: [
-            { quantidade: 4000, tipo: 'Inteira', valor: 200 },
-            { quantidade: 1000, tipo: 'Meia', valor: 100 },
-            { quantidade: 1000, tipo: 'Meia solidária', valor: 200 },
-            { quantidade: 500, tipo: 'Camarote', valor: 350 }
+            { quantidade: 4000, nome: 'Inteira', valor: 200 },
+            { quantidade: 1000, nome: 'Meia', valor: 100 },
+            { quantidade: 1000, nome: 'Meia solidária', valor: 200 },
+            { quantidade: 500, nome: 'Camarote', valor: 350 }
         ],
         nome: 'Evento do Renan',
         idProdutor: '123456',
@@ -69,15 +71,47 @@ const eventoService = {
     listarEventos: async (idProdutor: string): Promise<Evento[]> => {
         try {
             
-            return eventosMock.filter(x => x.idProdutor === idProdutor);
+            const eventos = await fetch(`${URL_EVENTO}/${idProdutor}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(resposta => resposta.json())
+            .then((eventos: Evento[]) => {
+
+                return eventos;
+            });
+
+            return eventos;
         } catch (erro: any) {
             throw new Error(erro);
         }
     },
-    listarEvento: async (idEvento: string): Promise<Evento> => {
+    listarEvento: async (idProdutor: string, idEvento: string): Promise<Evento> => {
         try {
             
-            return eventosMock.filter(x => x.id === idEvento)[0];
+            const corpo = {
+                idProdutor,
+                idEvento
+            };
+
+            const evento = await fetch(`${URL_EVENTO}/buscar`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(corpo)
+            })
+            .then(resposta => resposta.json())
+            .then((eventos: Evento) => {
+
+                return eventos;
+            });
+
+            return evento;
         } catch (erro: any) {
             throw new Error(erro);
         }
@@ -86,7 +120,16 @@ const eventoService = {
         
     },
     cadastrarEvento: async (evento: Evento) => {
-        
+        let corpo = { ...evento };
+
+        await fetch(URL_EVENTO, {
+            method: 'POST',
+            body: JSON.stringify(corpo),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
     }
 };
 

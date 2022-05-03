@@ -1,5 +1,5 @@
 export default interface Ingresso {
-    tipo: string;
+    nome: string;
     valor: number;
     quantidade: number
 }

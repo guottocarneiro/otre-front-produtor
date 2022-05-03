@@ -28,13 +28,16 @@ const DetalhesEvento = () => {
     let { id } = useParams();
 
     useEffect(() => {
-        const obterEvento = async () => eventoService.listarEvento(id as string)
-        .then(evento => {
-            setEvento(evento)
-        });
+        if (usuario !== null) {
+            const obterEvento = async () => eventoService.listarEvento(usuario.id, id as string)
+                .then(evento => {
+                    setEvento(evento)
+                });
 
-        obterEvento();
-    }, [id])
+            obterEvento();
+        }
+
+    }, [id, usuario])
 
     return (
         <div className="detalhes-evento">
@@ -80,7 +83,7 @@ const DetalhesEvento = () => {
                                             evento.ingressos.map((ing, i) => {
                                                 return (
                                                     <li key={i} className="list-group-item">
-                                                        <strong>{ing.tipo}</strong><br />
+                                                        <strong>{ing.nome}</strong><br />
                                                         {ing.valor.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}<br />
                                                         Quantidade: {ing.quantidade.toLocaleString('pt-br')}
                                                     </li>
