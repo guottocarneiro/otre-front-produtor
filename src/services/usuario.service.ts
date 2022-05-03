@@ -44,15 +44,22 @@ const usuarioService = {
         usuarioStore.removerUsuario();
     },
     logado: () => JSON.parse(localStorage.getItem('otre-usuario') as string) != null,
-    registrar: async (usuario: Usuario): Promise<UsuarioLogado | undefined> => {
+    registrar: async (usuario: Usuario): Promise<void | undefined> => {
         try {
-            let email = usuario.email;
-            const usuarioLogado: UsuarioLogado = {
-                id: '123456',
-                email
+            let corpo = {
+                email: usuario.email,
+                senha: usuario.senha
             };
 
-            return usuarioLogado;
+            await fetch(URL_USUARIO, {
+                method: 'POST',
+                body: JSON.stringify(corpo),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+
         } catch (erro: any) {
             throw new Error(erro);
         }
