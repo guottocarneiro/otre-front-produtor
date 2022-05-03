@@ -5,10 +5,12 @@ import './CardEvento.css';
 
 interface CardEventoInterface {
     evento: Evento;
+    alterarStatus: (id:string, status: boolean) => void;
 }
 
 const CardEvento = ({
-    evento
+    evento,
+    alterarStatus
 }: CardEventoInterface) => {
     return (
         <Card className="card-evento">
@@ -34,7 +36,9 @@ const CardEvento = ({
                         </strong>
                     </span>
                     <button
-                        className="btn btn-secondary btn-sm">
+                        className="btn btn-secondary btn-sm"
+                        onClick={() => alterarStatus(evento.id, evento.ativado)}
+                    >
                             {
                                 evento.ativado ?
                                 'Desativar' :

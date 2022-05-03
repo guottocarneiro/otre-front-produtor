@@ -28,11 +28,22 @@ const ListaEventos = () => {
 
         if (usuario !== null) {
             eventoService.listarEventos(usuario.id)
-            .then(eventos => {
-                setEventos(eventos)
-            })
+                .then(eventos => {
+                    setEventos(eventos)
+                })
         }
     }, [usuario])
+
+    const alterarStatus = (id: string, status: boolean) => {
+        eventoService.alterarStatusEvento(id, status)
+            .then(() => {
+                const copiaEventos = [...eventos];
+                const eventoParaAlterar = copiaEventos.filter(x => x.id === id)[0];
+                eventoParaAlterar.ativado = !eventoParaAlterar.ativado;
+                setEventos(copiaEventos);
+            })
+
+    }
 
     return (
         <div className="lista-eventos">
@@ -42,11 +53,12 @@ const ListaEventos = () => {
 
             {
                 eventos.length > 0 ?
-                    eventos.map((evento, i) => {
+                    eventos.map(evento => {
                         return (
                             <CardEvento
                                 evento={evento}
-                                key={i}
+                                key={evento.id}
+                                alterarStatus={alterarStatus}
                             />
                         );
                     }) :
