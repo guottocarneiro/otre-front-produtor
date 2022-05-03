@@ -3,11 +3,6 @@ import usuarioStore from '../store/usuario.store';
 
 const URL_USUARIO = 'https://otre-backend-produtor.herokuapp.com/produtores';
 
-const usuarios: UsuarioLogado[] = [
-    { email: 'renan@email.com', id: '123456' },
-    { email: 'otto@email.com', id: '456789' }
-]
-
 const usuarioService = {
 
     logar: async (usuario: Usuario): Promise<UsuarioLogado | undefined> => {
