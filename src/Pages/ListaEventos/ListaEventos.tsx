@@ -35,14 +35,14 @@ const ListaEventos = () => {
     }, [usuario])
 
     const alterarStatus = (id: string, status: boolean) => {
-        eventoService.alterarStatusEvento(id, status)
+        eventoService.alterarStatusEvento(usuario.id, id, !status)
             .then(() => {
                 const copiaEventos = [...eventos];
                 const eventoParaAlterar = copiaEventos.filter(x => x.id === id)[0];
                 eventoParaAlterar.ativado = !eventoParaAlterar.ativado;
                 setEventos(copiaEventos);
             })
-
+            .catch(err => console.log(err))
     }
 
     return (

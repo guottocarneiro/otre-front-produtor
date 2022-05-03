@@ -51,8 +51,26 @@ const eventoService = {
             throw new Error(erro);
         }
     },
-    alterarStatusEvento: async (idEvento: string, status: boolean) => {
-        
+    alterarStatusEvento: async (idProdutor: string, idEvento: string, status: boolean) => {
+        try {
+            
+            const corpo = {
+                idProdutor,
+                idEvento,
+                status
+            };
+
+            await fetch(URL_EVENTO, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(corpo)
+            });
+        } catch (erro: any) {
+            throw new Error(erro);
+        }
     },
     cadastrarEvento: async (evento: Evento) => {
         let corpo = { ...evento };

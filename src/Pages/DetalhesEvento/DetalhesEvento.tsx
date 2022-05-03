@@ -44,8 +44,11 @@ const DetalhesEvento = () => {
             {
                 evento !== null && evento !== undefined ?
                     <>
-                        <div>
+                        <div className="detalhes-evento-cabecalho">
                             <h1 className="display-3">{evento.nome}</h1>
+                            <h5 className={evento.ativado ? "text-success" : "text-danger"}>
+                                { evento.ativado ? "Ativado" : "Desativado" }
+                            </h5>
                             <p className="lead">{evento.descricao}</p>
                         </div>
 
