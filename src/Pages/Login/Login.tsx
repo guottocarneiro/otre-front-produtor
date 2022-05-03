@@ -33,6 +33,9 @@ const Login = () => {
         };
 
         usuarioService.logar(usuario)
+        .then(() => {
+            navigate('/lista-eventos')
+        })
         .catch((erro: any) => {
             setErro(true);
             setTextoErro('Ocorreu um erro ao fazer login. Tente novamente mais tarde!');
