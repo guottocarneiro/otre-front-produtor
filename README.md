@@ -1,3 +1,12 @@
+# Rodando o container
+
+Para rodar a aplicação localmente com Docker, rode os seguimentos comandos:
+
+- npm install
+- npm run build
+- docker build -t otre-frontend .
+- docker-compose up -d
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
