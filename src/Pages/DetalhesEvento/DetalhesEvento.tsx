@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Loading from '../../Components/Loading/Loading';
 import Evento from '../../interfaces/evento.interface';
 import { UsuarioLogado } from '../../interfaces/usuario.interface';
 import eventoService from '../../services/evento.service';
@@ -99,7 +100,9 @@ const DetalhesEvento = () => {
                             </div>
                         </div>
                     </> :
-                    null
+                    <div className="text-center">
+                        <Loading />
+                    </div>
             }
         </div>
     );
