@@ -29,12 +29,12 @@ const CardEvento = ({
                     {evento.descricao}
                     <span className="card-evento-texto-status">
                         <strong>
-                            Status: 
+                            Status:
                             <span className={evento.ativado ? 'text-success' : 'text-danger'}>
                                 {
                                     evento.ativado ?
-                                    ' Ativado' :
-                                    ' Desativado'
+                                        ' Ativado' :
+                                        ' Desativado'
                                 }
                             </span>
                         </strong>
@@ -42,16 +42,11 @@ const CardEvento = ({
                     <button
                         className="btn btn-secondary btn-sm"
                         onClick={() => alterarStatus(evento.id, evento.ativado)}
-                        disabled={carregandoStatus}
                     >
                         {
-                            carregandoStatus ?
-                            <Loading pequeno={true} /> :
-                            (
-                                evento.ativado ?
+                            evento.ativado ?
                                 'Desativar' :
                                 'Ativar'
-                            )
                         }
                     </button>
                 </Card.Text>
