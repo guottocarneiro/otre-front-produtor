@@ -10,6 +10,7 @@ import usuarioStore from "../../store/usuario.store";
 import { UsuarioLogado } from "../../interfaces/usuario.interface";
 import eventoService from "../../services/evento.service";
 import Alerta from "../../Components/Alerta/Alerta";
+import Loading from "../../Components/Loading/Loading";
 
 const CadastroEvento = () => {
 
@@ -30,6 +31,8 @@ const CadastroEvento = () => {
     const [usuario, setUsuario] = useState<UsuarioLogado>(usuarioStore.estadoInicial);
 
     const [exibir, setExibir] = useState<boolean>(false);
+
+    const [cadastrando, setCadastrando] = useState<boolean>(false);
 
     let navigate = useNavigate();
 
@@ -125,6 +128,8 @@ const CadastroEvento = () => {
 
     const cadastrarEvento = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        setCadastrando(true);
         
         const evento: Evento = {
             artistas: artistas,
@@ -150,7 +155,8 @@ const CadastroEvento = () => {
             .then(() => {
                 setExibir(true);
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log(err))
+            .finally(() => setCadastrando(false))
     }
 
     return (
@@ -385,9 +391,13 @@ const CadastroEvento = () => {
                     <button
                         type="submit"
                         className="btn btn-primary"
-                        disabled={camposValidos()}
+                        disabled={camposValidos() || cadastrando}
                     >
-                        Cadastrar
+                        {
+                            cadastrando ?
+                            <Loading pequeno={true} /> :
+                            'Cadastrar'
+                        }
                     </button>
                 </div>
             </Form>
