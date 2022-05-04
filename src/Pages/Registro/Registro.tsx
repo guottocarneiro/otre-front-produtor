@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Alerta from "../../Components/Alerta/Alerta";
 import LoginFormulario from "../../Components/LoginFormulario/LoginFormulario";
 import { Usuario } from "../../interfaces/usuario.interface";
 import usuarioService from "../../services/usuario.service";
@@ -15,6 +16,8 @@ const Registro = () => {
 
     const [erro, setErro] = useState<boolean>(false);
     const [textoErro, setTextoErro] = useState<string>('');
+
+    const [exibir, setExibir] = useState<boolean>(false);
 
     let navigate = useNavigate();
 
@@ -39,6 +42,7 @@ const Registro = () => {
             setEmail('');
             setSenha('');
             setConfSenha('');
+            setExibir(true);
         })
         .catch((erro: Error) => {
             setErro(true);
@@ -107,6 +111,13 @@ const Registro = () => {
                     </div> :
                     null
             }
+
+            <Alerta
+                alterarExibir={setExibir}
+                exibir={exibir}
+                texto="Usuário registrado com sucesso"
+                titulo="Sucesso"
+            />
         </main>
     )
 }
