@@ -5,7 +5,7 @@ const URL_EVENTO = 'https://otre-backend.herokuapp.com/eventos';
 const eventoService = {
     listarEventos: async (idProdutor: string): Promise<Evento[]> => {
         try {
-            
+
             const eventos = await fetch(`${URL_EVENTO}/${idProdutor}`, {
                 method: 'GET',
                 headers: {
@@ -13,11 +13,11 @@ const eventoService = {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(resposta => resposta.json())
-            .then((eventos: Evento[]) => {
+                .then(resposta => resposta.json())
+                .then((eventos: Evento[]) => {
 
-                return eventos;
-            });
+                    return eventos;
+                });
 
             return eventos;
         } catch (erro: any) {
@@ -26,7 +26,7 @@ const eventoService = {
     },
     listarEvento: async (idProdutor: string, idEvento: string): Promise<Evento> => {
         try {
-            
+
             const corpo = {
                 idProdutor,
                 idEvento
@@ -40,11 +40,11 @@ const eventoService = {
                 },
                 body: JSON.stringify(corpo)
             })
-            .then(resposta => resposta.json())
-            .then((eventos: Evento) => {
+                .then(resposta => resposta.json())
+                .then((eventos: Evento) => {
 
-                return eventos;
-            });
+                    return eventos;
+                });
 
             return evento;
         } catch (erro: any) {
@@ -53,7 +53,7 @@ const eventoService = {
     },
     alterarStatusEvento: async (idProdutor: string, idEvento: string, status: boolean) => {
         try {
-            
+
             const corpo = {
                 idProdutor,
                 idEvento,
@@ -73,16 +73,20 @@ const eventoService = {
         }
     },
     cadastrarEvento: async (evento: Evento) => {
-        let corpo = { ...evento };
+        try {
+            let corpo = { ...evento };
 
-        // await fetch(URL_EVENTO, {
-        //     method: 'POST',
-        //     body: JSON.stringify(corpo),
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'
-        //     }
-        // });
+            await fetch(URL_EVENTO, {
+                method: 'POST',
+                body: JSON.stringify(corpo),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+        } catch (erro: any) {
+            throw new Error(erro);
+        }
     }
 };
 
