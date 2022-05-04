@@ -1,11 +1,15 @@
-import Spinner from 'react-bootstrap/Spinner'
+interface LoadingInterface {
+    pequeno: boolean;
+}
 
-const Loading = () => {
+const Loading = ({
+    pequeno
+}: LoadingInterface) => {
 
     return (
-        <Spinner animation="border" role="status">
+        <div className={`spinner-border ${pequeno ? 'spinner-border-sm' : null}`} role="status">
             <span className="visually-hidden">Loading...</span>
-        </Spinner>
+        </div>
     );
 }
 

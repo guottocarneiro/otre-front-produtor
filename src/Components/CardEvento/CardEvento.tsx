@@ -2,16 +2,19 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Evento from "../../interfaces/evento.interface";
 import obterDescricaoEndereco from "../../utils/descricao-endereco.utils";
+import Loading from "../Loading/Loading";
 import './CardEvento.css';
 
 interface CardEventoInterface {
     evento: Evento;
-    alterarStatus: (id:string, status: boolean) => void;
+    alterarStatus: (id: string, status: boolean) => void;
+    carregandoStatus: boolean;
 }
 
 const CardEvento = ({
     evento,
-    alterarStatus
+    alterarStatus,
+    carregandoStatus
 }: CardEventoInterface) => {
     return (
         <Card className="card-evento">
@@ -39,12 +42,17 @@ const CardEvento = ({
                     <button
                         className="btn btn-secondary btn-sm"
                         onClick={() => alterarStatus(evento.id, evento.ativado)}
+                        disabled={carregandoStatus}
                     >
-                            {
+                        {
+                            carregandoStatus ?
+                            <Loading pequeno={true} /> :
+                            (
                                 evento.ativado ?
                                 'Desativar' :
                                 'Ativar'
-                            }
+                            )
+                        }
                     </button>
                 </Card.Text>
             </Card.Body>

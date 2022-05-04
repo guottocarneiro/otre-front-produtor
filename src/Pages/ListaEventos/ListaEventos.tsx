@@ -16,6 +16,8 @@ const ListaEventos = () => {
 
     const [loading, setLoading] = useState<boolean>(false);
 
+    const [carregandoStatus, setCarregandoStatus] = useState<boolean>(false);
+
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -41,6 +43,7 @@ const ListaEventos = () => {
     }, [usuario])
 
     const alterarStatus = (id: string, status: boolean) => {
+        setCarregandoStatus(true);
         eventoService.alterarStatusEvento(usuario.id, id, !status)
             .then(() => {
                 const copiaEventos = [...eventos];
@@ -49,6 +52,7 @@ const ListaEventos = () => {
                 setEventos(copiaEventos);
             })
             .catch(err => console.log(err))
+            .finally(() => setCarregandoStatus(false));
     }
 
     return (
@@ -57,7 +61,7 @@ const ListaEventos = () => {
             {
                 loading ?
                 <div className="text-center">
-                    <Loading />
+                    <Loading pequeno={false} />
                 </div> :
                 <>
                     <HeaderPagina
@@ -72,6 +76,7 @@ const ListaEventos = () => {
                                         evento={evento}
                                         key={evento.id}
                                         alterarStatus={alterarStatus}
+                                        carregandoStatus={carregandoStatus}
                                     />
                                 );
                             }) :

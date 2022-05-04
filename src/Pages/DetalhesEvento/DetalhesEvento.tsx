@@ -101,7 +101,7 @@ const DetalhesEvento = () => {
                         </div>
                     </> :
                     <div className="text-center">
-                        <Loading />
+                        <Loading pequeno={false} />
                     </div>
             }
         </div>
