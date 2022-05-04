@@ -31,6 +31,7 @@ const ListaEventos = () => {
                 .then(eventos => {
                     setEventos(eventos)
                 })
+                .catch(err => console.log(err))
         }
     }, [usuario])
 

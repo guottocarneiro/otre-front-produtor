@@ -32,7 +32,8 @@ const DetalhesEvento = () => {
             const obterEvento = async () => eventoService.listarEvento(usuario.id, id as string)
                 .then(evento => {
                     setEvento(evento)
-                });
+                })
+                .catch(err => console.log(err))
 
             obterEvento();
         }
