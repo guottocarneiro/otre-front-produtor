@@ -75,14 +75,14 @@ const eventoService = {
     cadastrarEvento: async (evento: Evento) => {
         let corpo = { ...evento };
 
-        await fetch(URL_EVENTO, {
-            method: 'POST',
-            body: JSON.stringify(corpo),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        });
+        // await fetch(URL_EVENTO, {
+        //     method: 'POST',
+        //     body: JSON.stringify(corpo),
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     }
+        // });
     }
 };
 

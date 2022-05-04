@@ -9,6 +9,7 @@ import usuarioService from "../../services/usuario.service";
 import usuarioStore from "../../store/usuario.store";
 import { UsuarioLogado } from "../../interfaces/usuario.interface";
 import eventoService from "../../services/evento.service";
+import Alerta from "../../Components/Alerta/Alerta";
 
 const CadastroEvento = () => {
 
@@ -27,6 +28,8 @@ const CadastroEvento = () => {
     const [ingressos, setIngressos] = useState<Array<Ingresso>>([{ nome: '', valor: 0, quantidade: 1 }]);
 
     const [usuario, setUsuario] = useState<UsuarioLogado>(usuarioStore.estadoInicial);
+
+    const [exibir, setExibir] = useState<boolean>(false);
 
     let navigate = useNavigate();
 
@@ -143,7 +146,11 @@ const CadastroEvento = () => {
             idProdutor: usuario.id
         };
 
-        eventoService.cadastrarEvento(evento);
+        eventoService.cadastrarEvento(evento)
+            .then(() => {
+                setExibir(true);
+            })
+            .catch(err => console.log(err));
     }
 
     return (
@@ -384,6 +391,13 @@ const CadastroEvento = () => {
                     </button>
                 </div>
             </Form>
+
+            <Alerta
+                texto="Sucesso ao cadastrar evento"
+                titulo="Sucesso"
+                exibir={exibir}
+                alterarExibir={setExibir}
+            />
         </div>
     );
 }
