@@ -23,7 +23,8 @@ const usuarioService = {
             })
             .then(resposta => resposta.json())
             .then((usuarioLogado: UsuarioLogado) => {
-                localStorage.setItem('otre-usuario', JSON.stringify(usuarioLogado));
+                const { id, email } = usuarioLogado;
+                localStorage.setItem('otre-usuario', JSON.stringify({ id, email }));
                 usuarioStore.adicionarUsuario(usuarioLogado.id, usuarioLogado.email);
 
                 return usuarioLogado;

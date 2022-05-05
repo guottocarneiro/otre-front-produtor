@@ -2,19 +2,16 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Evento from "../../interfaces/evento.interface";
 import obterDescricaoEndereco from "../../utils/descricao-endereco.utils";
-import Loading from "../Loading/Loading";
 import './CardEvento.css';
 
 interface CardEventoInterface {
     evento: Evento;
     alterarStatus: (id: string, status: boolean) => void;
-    carregandoStatus: boolean;
 }
 
 const CardEvento = ({
     evento,
-    alterarStatus,
-    carregandoStatus
+    alterarStatus
 }: CardEventoInterface) => {
     return (
         <Card className="card-evento">
